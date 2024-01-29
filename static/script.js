@@ -5,8 +5,12 @@ let selectedTimer;
 function updateTimerDisplay() {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    document.getElementById('timer').innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+    document.getElementById('timer').innerText = formattedTime;
+    document.title = `${formattedTime} - KFocus`;
 }
+
 
 function startPauseTimer() {
     playClick();
