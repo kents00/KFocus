@@ -73,14 +73,6 @@ function selectTimer(timerType) {
     document.getElementById('startPauseBtn').innerText = 'Start';
 }
 
-function setCustomTime() {
-    const customTime = prompt('Enter custom time in minutes:');
-    if (customTime !== null && !isNaN(customTime) && customTime > 0) {
-        time = customTime * 60;
-        updateTimerDisplay();
-    }
-}
-
 function setTimerDuration() {
     switch (selectedTimer) {
         case 'pomodoro':
