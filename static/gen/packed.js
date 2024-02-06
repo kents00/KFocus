@@ -1,0 +1,8 @@
+let timer;let time;let selectedTimer;function updateTimerDisplay(){const minutes=Math.floor(time/60);const seconds=time%60;const formattedTime=`${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;document.getElementById('timer').innerText=formattedTime;document.title=`${formattedTime}-KFocus`;}
+function startPauseTimer(){playClick();if(!timer){timer=setInterval(()=>{if(time>0){time--;updateTimerDisplay();}else{clearInterval(timer);timer=null;document.getElementById('startPauseBtn').innerText='Start';playAlarm();redirectToNextTimer();}},1000);document.getElementById('startPauseBtn').innerText='Pause';}else{clearInterval(timer);timer=null;document.getElementById('startPauseBtn').innerText='Resume';}}
+function playAlarm(){const audio=document.getElementById('beep');audio.play();}
+function playClick(){const audio=document.getElementById("play_pause");audio.play();}
+function redirectToNextTimer(){if(selectedTimer==='pomodoro'){setTimeout(()=>{selectTimer('shortBreak');startPauseTimer();},3000);}else if(selectedTimer==='shortBreak'){setTimeout(()=>{selectTimer('pomodoro');startPauseTimer();},3000);}else if(selectedTimer==='longBreak'){setTimeout(()=>{selectTimer('pomodoro');startPauseTimer();},3000);}}
+function selectTimer(timerType){clearInterval(timer);timer=null;selectedTimer=timerType;setTimerDuration();updateTimerDisplay();document.getElementById('startPauseBtn').innerText='Start';}
+function setTimerDuration(){switch(selectedTimer){case'pomodoro':time=25*60;break;case'shortBreak':time=7*60;break;case'longBreak':time=15*60;break;default:break;}}
+document.addEventListener('DOMContentLoaded',()=>{selectTimer('pomodoro');});
